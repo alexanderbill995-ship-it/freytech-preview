@@ -1,15 +1,11 @@
 /**
  * Homepage copy. Everything attributed to Angelo or describing owner history is
  * PROPOSED and flagged for approval (see docs/OWNER-VERIFICATION-CHECKLIST.md).
- * The years figure comes from site.since (current site: business purchased 1987).
+ * The founding year is not published here; About reads it from site.since.
  */
-import { site } from "@/lib/site";
-
-/** Company tenure comes from the current site's 1987 purchase statement; confirm before publishing a number. */
-export const companySince = site.since;
 
 export const hero = {
-  eyebrow: "Commercial water quality · New York State outside NYC",
+  eyebrow: "Commercial water quality · New York State",
   title: "Commercial water quality deserves personal accountability.",
   lede: "FreyTech is an owner-led commercial aquatic company that helps New York facilities solve water-quality problems, modernize equipment rooms and keep critical systems operating. Commercial expertise without the corporate handoff: you work with people who know your facility, understand the equipment and stay accountable for the result.",
   primary: { label: "Talk With Angelo About Your Facility", href: "/contact/?intent=angelo" },
@@ -21,7 +17,7 @@ export const proof = [
   { value: "Owner-led", label: "more than a decade of commercial aquatic industry and sales experience behind the company" },
   { value: "Institutional", label: "municipal, school, university, YMCA and healthcare experience", confirm: "Confirm references" },
   { value: "End to end", label: "equipment selection, installation, commissioning, training and service", confirm: "Confirm each service is offered" },
-  { value: "New York", label: "Wayne County office; commercial and institutional focus statewide, excluding New York City" },
+  { value: "New York", label: "Monroe County office; commercial and institutional focus statewide" },
   { value: "BECS distributor", label: "listed by BECS Technology as its New York distributor" },
 ];
 

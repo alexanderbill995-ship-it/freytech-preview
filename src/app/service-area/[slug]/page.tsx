@@ -9,7 +9,7 @@ import { Confirm } from "@/components/ui/Confirm";
 import { CTABand } from "@/components/ui/CTABand";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { pageMetadata } from "@/lib/seo";
-import { serviceRegions } from "@/lib/regions";
+import { serviceRegions, regionPhrase } from "@/lib/regions";
 import { regionCopy } from "@/content/regionsCopy";
 import { markets } from "@/content/markets";
 import { site } from "@/lib/site";
@@ -25,7 +25,7 @@ export async function generateMetadata({ params }: PageProps<"/service-area/[slu
   if (!r) return {};
   return pageMetadata({
     title: `Commercial Pool Chemical Controls & Feed Systems: ${r.name}, NY`,
-    description: `BECSys5 controls, Pulsar Precision feeders, installation, and service for commercial pools in ${r.counties.join(", ")} ${r.counties.length > 1 ? "counties" : "County"}. FreyTech serves New York State outside NYC.`,
+    description: `BECSys5 controls, Pulsar Precision feeders, installation, and service for commercial pools in ${r.counties.join(", ")} ${r.counties.length > 1 ? "counties" : "County"}. FreyTech serves New York State.`,
     path: `/service-area/${r.slug}/`,
   });
 }
@@ -84,11 +84,11 @@ export default async function Page({ params }: PageProps<"/service-area/[slug]">
       </Section>
 
       <Section tone="alt">
-        <SectionHeader eyebrow="Solutions" title={`What we install and service in the ${r.name}`} />
+        <SectionHeader eyebrow="Solutions" title={`What we install and service in ${regionPhrase(r.name)}`} />
         <div className="grid grid-3">
           <Card title="BECSys5 automated controls" href="/becsys5-controls/" footer="Details and FAQ"><p>Controller modernization with remote visibility, alarms, and records for pools of every size.</p></Card>
           <Card title="Pulsar Precision feeders" href="/pulsar-precision-feeders/" footer="Qualification"><p>High-capacity calcium hypochlorite delivery for large pools and high bather loads, sized by measured demand.</p></Card>
-          <Card title="Service and maintenance" href="/service-support/" footer="Service capabilities"><p>Preventive maintenance, troubleshooting, parts, training, and warranty coordination from our Wayne County office.</p></Card>
+          <Card title="Service and maintenance" href="/service-support/" footer="Service capabilities"><p>Preventive maintenance, troubleshooting, parts, training, and warranty coordination from our Monroe County office.</p></Card>
         </div>
       </Section>
 
@@ -98,7 +98,7 @@ export default async function Page({ params }: PageProps<"/service-area/[slug]">
         <p className={p.small}>Other regions: {serviceRegions.filter((x) => x.slug !== r.slug).map((x, i) => <span key={x.slug}>{i > 0 && " · "}<Link href={`/service-area/${x.slug}/`}>{x.name}</Link></span>)}</p>
       </Section>
 
-      <CTABand source={`region-${r.slug}`} title={`Planning a chemistry upgrade in the ${r.name}?`} />
+      <CTABand source={`region-${r.slug}`} title={`Planning a chemistry upgrade in ${regionPhrase(r.name)}?`} />
     </>
   );
 }

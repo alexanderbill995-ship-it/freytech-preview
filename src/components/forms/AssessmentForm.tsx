@@ -9,7 +9,7 @@ import { useLeadForm, type Errors } from "./useLeadForm";
 import { emailRe, validPhone, isFreeMail, classifyTerritory } from "./submit";
 import * as o from "./options";
 import { allCounties } from "@/lib/regions";
-import { site } from "@/lib/site";
+import { site, telHref } from "@/lib/site";
 import styles from "./Form.module.css";
 
 const labels: Record<string, string> = {
@@ -48,6 +48,7 @@ export function AssessmentForm({ defaultRequest, defaultProduct, context = {}, c
 
   return (
     <form ref={formRef} className={styles.form} onSubmit={onSubmit} onFocus={onStart} onBlur={onBlur} noValidate aria-describedby="assessment-intro">
+      <noscript><p className={styles.hint}>This form needs JavaScript to submit. If it is not working, call <a href={telHref(site.phone)}>{site.phone}</a> or email <a href={`mailto:${site.email}`}>{site.email}</a>.</p></noscript>
       <input type="hidden" name="product_interest_context" defaultValue={defaultProduct ?? ""} />
       <input type="hidden" name="category_context" defaultValue={context.category ?? ""} />
       <input type="hidden" name="problem_context" defaultValue={context.problem ?? ""} />
@@ -72,7 +73,7 @@ export function AssessmentForm({ defaultRequest, defaultProduct, context = {}, c
         {!compact && <Field id="title" label="Title or role"><Input id="title" autoComplete="organization-title" placeholder="e.g., Director of Facilities, Aquatics Director" /></Field>}
       </Fieldset>
 
-      <Fieldset legend="Facility location" hint="FreyTech serves New York State outside New York City. Facilities elsewhere can still submit; we will tell you honestly whether we can help or refer you.">
+      <Fieldset legend="Facility location" hint="FreyTech serves New York State. Facilities elsewhere can still submit; we will tell you honestly whether we can help or refer you.">
         {!compact && <Field id="address" label="Facility address" className={styles.span2}><Input id="address" autoComplete="street-address" placeholder="Street, city, ZIP" /></Field>}
         <Field id="state" label="State" required error={errors.state}>
           <Select id="state" options={o.states} defaultValue="NY" required error={errors.state} onChange={(e) => setState(e.target.value)} placeholder="Select state" />
@@ -84,12 +85,12 @@ export function AssessmentForm({ defaultRequest, defaultProduct, context = {}, c
         )}
         {territory === "nyc" && (
           <p className={[styles.routing, styles.span2].join(" ")} role="status">
-            <strong>Outside our primary territory.</strong> {county} County is within New York City, which FreyTech does not currently serve as a primary market. You may still submit this form; we will respond and, where we can, point you to an appropriate resource.
+            <strong>New York City coverage.</strong> {county} County is within the five boroughs. FreyTech covers New York City, and work there is scheduled through our local coverage for the area, so lead times can differ from upstate. Send the form and we will confirm specifics.
           </p>
         )}
         {territory === "out_of_state" && (
           <p className={[styles.routing, styles.span2].join(" ")} role="status">
-            <strong>Outside our primary territory.</strong> FreyTech focuses on New York State outside New York City. You may still submit this form and we will respond honestly about whether we can help.
+            <strong>Outside our primary territory.</strong> FreyTech focuses on New York State. You may still submit this form and we will respond honestly about whether we can help.
           </p>
         )}
       </Fieldset>
@@ -109,7 +110,7 @@ export function AssessmentForm({ defaultRequest, defaultProduct, context = {}, c
         <Field id="current_controller" label="Current chemical controller"><Select id="current_controller" options={o.controllers} /></Field>
         <Field id="current_feed" label="Current chemical-feed system"><Select id="current_feed" options={o.feeders} /></Field>
         {null}
-        <Field id="existing_equipment" label="Existing equipment to replace or match" className={styles.span2} hint="Make, model, and serial number if you have them. A photo of the nameplate can be described here and shared when we reply."><Input id="existing_equipment" defaultValue={context.existing_equipment ?? ""} placeholder="e.g., Strantrol System 5, LMI P-series pump, Paco pump model…" /></Field>
+        <Field id="existing_equipment" label="Existing equipment to replace or match" className={styles.span2} hint="Make, model, and serial number if you have them. A photo of the nameplate can be described here and shared when we reply."><Input id="existing_equipment" defaultValue={context.existing_equipment ?? ""} placeholder="e.g., Strantrol System 5, Stenner pump, Paco pump model…" /></Field>
       </Fieldset>}
 
       <Fieldset legend="Your request">
@@ -118,7 +119,7 @@ export function AssessmentForm({ defaultRequest, defaultProduct, context = {}, c
           <Select id="request_type" options={o.requestTypes} defaultValue={defaultRequest ?? ""} required error={errors.request_type} />
         </Field>
         <Field id="product_interest" label="Product or system of interest"><Input id="product_interest" defaultValue={defaultProduct ?? context.search_query ?? ""} placeholder="e.g., BECSys5, Pulsar Precision 30, filtration" /></Field>
-        {!compact && <Field id="manufacturer" label="Manufacturer, if known"><Input id="manufacturer" defaultValue={context.manufacturer ?? ""} placeholder="e.g., BECS, Pulsar, LMI, Lochinvar" /></Field>}
+        {!compact && <Field id="manufacturer" label="Manufacturer, if known"><Input id="manufacturer" defaultValue={context.manufacturer ?? ""} placeholder="e.g., BECS, Pulsar, Stenner, Lochinvar" /></Field>}
         {(defaultRequest === "document") && <Field id="requested_document" label="Document requested" className={styles.span2}><Input id="requested_document" defaultValue={context.requested_document ?? ""} placeholder="e.g., BECSys5 Technical Data Sheet" /></Field>}
         <Field id="primary_problem" label="Primary problem or goal" required error={errors.primary_problem}><Select id="primary_problem" options={o.primaryProblems} required error={errors.primary_problem} /></Field>
         <Field id="preferred_contact" label="Preferred contact method"><Select id="preferred_contact" options={o.contactMethods} /></Field>

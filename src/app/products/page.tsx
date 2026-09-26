@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/Button";
 import { CTABand } from "@/components/ui/CTABand";
 import { Breadcrumbs } from "@/components/ui/Breadcrumbs";
 import { ProductLibrary } from "@/components/catalog/ProductLibrary";
+import { ProductLibraryFallback } from "@/components/catalog/ProductLibraryFallback";
 import { SystemFlow } from "@/components/diagrams/SystemFlow";
 import { JsonLd } from "@/components/seo/JsonLd";
 import { pageMetadata } from "@/lib/seo";
@@ -16,7 +17,7 @@ import styles from "./products.module.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "Commercial Pool Equipment Catalog: Controls, Chemical Feed, Filtration, Pumps, Deck Equipment | FreyTech",
-  description: "Search commercial pool equipment, water-treatment systems, automated controls, chemical feeders, filters, pumps, deck equipment, testing products and replacement parts, with experienced New York support outside NYC.",
+  description: "Search commercial pool equipment, water-treatment systems, automated controls, chemical feeders, filters, pumps, deck equipment, testing products and replacement parts, with experienced New York support.",
   path: "/products/",
 });
 
@@ -28,7 +29,7 @@ export default function Page() {
         <div className="container">
           <Breadcrumbs crumbs={[{ name: "Products & Solutions", href: "/products/" }]} />
           <div className={styles.heroInner}>
-            <p className="eyebrow">Products &amp; solutions · New York State outside NYC</p>
+            <p className="eyebrow">Products &amp; solutions · New York State</p>
             <h1 className={styles.h1}>Looking for something? Let me show you what we&apos;ve got.</h1>
             <p className={styles.lede}>Search commercial pool equipment, water-treatment systems, automated controls, chemical feeders, filters, pumps, deck equipment, testing products and replacement parts, all with experienced New York support. Know the model, the manufacturer, or only the problem? Any of them will do.</p>
           </div>
@@ -36,7 +37,7 @@ export default function Page() {
       </header>
 
       <Section tight id="library">
-        <Suspense fallback={<p>Loading the catalog…</p>}>
+        <Suspense fallback={<ProductLibraryFallback />}>
           <ProductLibrary />
         </Suspense>
         <p className={styles.helpLine}>Not finding it, or not sure what you need? <Link href="/contact/?intent=find">Help me find the right solution</Link> or call <a href="tel:+18007242770">1-800-724-2770</a>.</p>

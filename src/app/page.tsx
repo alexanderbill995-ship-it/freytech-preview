@@ -16,16 +16,17 @@ import { asset } from "@/lib/paths";
 import { installations } from "@/content/projects";
 import { publishedCategories, categoryHref, activeManufacturers } from "@/content/catalog";
 import { exampleSearches } from "@/lib/search/synonyms";
-import { hero, proof, pillars, angeloNote, problems, systemStages, featured, lifecycle, catalogIntro, finalCta, companySince } from "@/content/homepage";
+import { hero, proof, pillars, angeloNote, problems, systemStages, featured, lifecycle, catalogIntro, finalCta } from "@/content/homepage";
 import { existsSync } from "node:fs";
 import { join } from "node:path";
 import { ContactFormClient } from "./contact/ContactFormClient";
+import { AssessmentForm } from "@/components/forms/AssessmentForm";
 import styles from "./page.module.css";
 import p from "@/styles/page.module.css";
 
 export const metadata: Metadata = pageMetadata({
   title: "Frey Technologies | Commercial Pool Water Quality, Equipment and Service in New York",
-  description: "Owner-operated commercial water-quality specialist for New York aquatic facilities outside NYC: facility evaluations, BECSys5 controls, Pulsar chlorination, equipment selection, installation, training and long-term service. Talk with Angelo about your facility.",
+  description: "Owner-operated commercial water-quality specialist for New York aquatic facilities: facility evaluations, BECSys5 controls, Pulsar chlorination, equipment selection, installation, training and long-term service. Talk with Angelo about your facility.",
   path: "/",
 });
 
@@ -214,7 +215,7 @@ export default function Home() {
           </div>
           <div style={{ background: "var(--white)", color: "var(--fg)", borderRadius: "var(--radius-lg)", padding: "var(--sp-6)" }} className="on-light">
             <h3 style={{ marginBottom: "var(--sp-4)" }}>Start the conversation</h3>
-            <Suspense fallback={<p>Loading form…</p>}><ContactFormClient compact /></Suspense>
+            <Suspense fallback={<AssessmentForm compact />}><ContactFormClient compact /></Suspense>
           </div>
         </div>
       </Section>
